@@ -1,0 +1,57 @@
+# All paths are relative to this config file, including when launched elsewhere.
+[storage]
+database = "data/scout.sqlite3"
+reports = "reports"
+# Drop observations and their analyses if not seen again within this window.
+retention_days = 30
+
+[browser]
+# A separate, reusable browser profile. Sign in once with: python bot.py login
+profile = "data/browser-profile"
+# chromium (installed by Playwright), chrome, or msedge
+channel = "chromium"
+headless = false
+navigation_timeout_seconds = 45
+page_delay_seconds = 4
+scroll_delay_seconds = 2
+max_scrolls = 8
+# Read only comments already loaded by Reddit; do not expand every reply tree.
+comments_per_post = 40
+
+[collection]
+# Change these freely; professional communities tend to expose costly problems.
+subreddits = [
+  "smallbusiness", "Entrepreneur", "freelance", "agency",
+  "ecommerce", "shopify", "EtsySellers", "FulfillmentByAmazon",
+  "Bookkeeping", "Accounting", "sales", "marketing",
+  "PPC", "SEO", "sysadmin", "msp", "devops", "webdev",
+  "propertymanagement", "realtors", "Construction", "supplychain"
+]
+feeds = ["new", "top"]
+time_filter = "month"
+# Search is scoped to each subreddit. Keep this small initially.
+search_queries = ['"manual" OR "spreadsheet"', '"frustrating" OR "alternative" OR "would pay"']
+posts_per_feed = 25
+# Bounds browser work per cycle, across ALL subreddits. Jobs resume next run.
+max_feed_pages_per_run = 24
+max_threads_per_run = 30
+refresh_hours = 24
+# Read some threads even if their titles have no complaint keywords.
+exploration_fraction = 0.25
+min_text_characters = 35
+
+[analysis]
+# auto uses Gemini when GEMINI_API_KEY is set, otherwise local rules.
+# Set local to keep all analysis on your PC, or gemini to require the key.
+mode = "auto"
+models = ["gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-2.5-flash"]
+batch_size = 6
+max_items_per_run = 180
+max_requests_per_run = 35
+min_request_interval_seconds = 6
+max_input_characters = 6000
+min_independent_threads = 2
+report_limit = 50
+
+[watch]
+interval_minutes = 360
